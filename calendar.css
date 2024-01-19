@@ -1,0 +1,24 @@
+.event-container {
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #534444;
+    width: 45%;
+}
+
+.event-container p.title {
+    background-color: #0066cc; 
+    color: #fff; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    padding: 8px; 
+    border-radius: 4px;
+    position: relative;
+    width: 97%;
+    left: 0%;
+}
+
+.event-container p.date-time {
+    font-weight: bold; 
+}
+

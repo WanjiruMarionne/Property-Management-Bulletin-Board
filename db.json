@@ -1,0 +1,60 @@
+{
+    "events": [
+      { 
+        "title": "Lift 1 Taking a Quick Break",
+        "date_time": "January 25th | Time - 9:00 AM - 11:00 PM",
+        "location": "Block A, Lift 1",
+        "impact": "Lift is inaccessible during this time",
+        "contact": "Concierge - 0724876590",
+        "reason": "Routine maintenance to keep the lift in tip-top shape for your comfort and safety",
+        "expected_duration": "2 hours",
+        "alternative_access": "Lift 2 is accessible. The stairs are also open too, but feel free to chat the neighbors",
+        "updates": "We'll keep you posted on any changes via the building app"
+      },
+      { 
+        "title": "Lift 2 Nap Time",
+        "date_time": "January 25th | Time - 2:00 PM - 4:00 PM",
+        "location": "Block A, Lift 2",
+        "impact": "Lift is inaccessible during this time",
+        "contact": "Concierge - 0724876590",
+        "reason": "Routine maintenance to the lift for smooth cruises",
+        "expected_duration": "2 hours",
+        "alternative_access": "Time to lace up those sneakers and work-out those glutes!",
+        "updates": "All whispers on the progress will be on the building app"
+      },
+      { 
+        "title": "Roof Getting a Refresh",
+        "date_time": "February 2nd | Time - 8:00 AM - 4:00 PM",
+        "location": "All Apartments",
+        "impact": "Expect temporary hubbub",
+        "contact": "Concierge - 0724876590",
+        "reason": "Repairs to keep your cozy haven leak-free and weatherproof for years to come.",
+        "expected_duration": "1 day, if the weather doesn't ruin the party",
+        "alternative_access": "The building operations remain uninterrupted, but it is also a good day to shop for groceries and visit old friends",
+        "updates": "Any changes will be on the building app"
+      },
+      { 
+        "title": "Fire Alarm & Smoke Detector Snooze Fest",
+        "date_time": "January 22nd | Time - 10:00 AM - 11:00 AM",
+        "location": "Entire Building - Mainly Hallways and Common Areas",
+        "impact": "Intermittent beeps and chirps",
+        "contact": "Concierge - 0724876590",
+        "reason": "Routine maintenance to keep the fire alarm system sharp and alert",
+        "expected_duration": "45 minutes",
+        "alternative_access": "All entrances and exits remain open",
+        "updates": "Stay updated via the building app"
+      },
+      { 
+        "title": "Lobby Gone MIA",
+        "date_time": "February 12th | Time - 4.00 PM - 6.00 PM",
+        "location": "Building Lobby",
+        "impact": "Lobby is unaivailable",
+        "contact": "Concierge - 0724876590, Resident - Unit 45",
+        "reason": "Private booking",
+        "expected_duration": "2 hours",
+        "alternative_access": "No need to miss out! Take a lazy walk around or relax by the coutyard",
+        "updates": "Updates will be posted via the building app"
+      }
+
+    ]
+  }
