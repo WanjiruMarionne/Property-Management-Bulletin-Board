@@ -1,11 +1,3 @@
-.event-container {
-    border: 1px solid #ccc;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    background-color: #534444;
-    width: 45%;
-}
-
 .event-container p.title {
     background-color: #0066cc; 
     color: #fff; 
@@ -20,5 +12,16 @@
 
 .event-container p.date-time {
     font-weight: bold; 
+}
+
+.event-container {
+    box-sizing: border-box;
+    background-color: rgb(217, 217, 217);;
+    top: 20%;
+    left: 30%;
+    height: 15%;
+    width: 40%;
+    position: absolute;
+    border-radius: 15px;
 }
 

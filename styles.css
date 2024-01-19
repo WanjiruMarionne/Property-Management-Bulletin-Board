@@ -78,39 +78,6 @@
     padding-left: 50px;
 }
 
-#event1 {
-    box-sizing: border-box;
-    background-color: rgb(217, 217, 217);;
-    top: 20%;
-    left: 30%;
-    height: 15%;
-    width: 40%;
-    position: absolute;
-    border-radius: 15px;
-}
-
-#event2 {
-    box-sizing: border-box;
-    background-color: rgb(217, 217, 217);;
-    top: 37%;
-    left: 30%;
-    height: 15%;
-    width: 40%;
-    position: absolute;
-    border-radius: 15px;
-}
-
-#event3 {
-    box-sizing: border-box;
-    background-color: rgb(217, 217, 217);;
-    top: 54%;
-    left: 30%;
-    height: 15%;
-    width: 40%;
-    position: absolute;
-    border-radius: 15px;
-}
-
 #quotes-container {
     box-sizing: border-box;
     background-color: rgb(217, 217, 217);
@@ -155,7 +122,6 @@
 
 #forecast-image-container {
     box-sizing: border-box;
-    background-color: blueviolet;
     height: 80%;
     width: 50%;
     position: absolute;
@@ -167,7 +133,7 @@
     max-height: 80%;
     max-width: 80%;
     position: absolute;
-    top: 35%;
+    top: 15%;
     left: 5%;
 }
 
@@ -184,7 +150,7 @@
 
 #description-container #weather-desc {
     top: 40%;
-    left: 60%;
+    left: 50%;
     position: absolute;
 }
 
@@ -198,3 +164,31 @@
     bottom: 15%;
     left: 10%;
 }
+
+.event-container p.title {
+    background-color: rgb(192, 67, 27); 
+    color: #fff; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    padding: 8px; 
+    border-radius: 4px;
+    position: relative;
+    width: 97%;
+    left: 0%;
+}
+
+.event-container p.date-time {
+    font-weight: bold; 
+}
+
+.event-container {
+    box-sizing: border-box;
+    background-color: rgb(217, 217, 217);;
+    top: 20%;
+    left: 30%;
+    height: 15%;
+    width: 40%;
+    position: absolute;
+    border-radius: 15px;
+}
+
