@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    //Logic for populating the weather information on the footer
+    //Weather information
     // Default latitude and longitude values for the town of application: set to Westlands-Kenya
     const latitude = -1.2667;
     const longitude = 36.8;
@@ -9,14 +9,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const hourly = 'temperature_2m,rain,weather_code';
     const forecastDays = 1;
 
-    // Fetch the API data
+    // Fetch weather data
     fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=${hourly}&forecast_days=${forecastDays}`)
         .then(response => response.json())
         .then(data => {
             // Handle the fetched data
             console.log(data);
 
-            // Display the weather data in the weather container
+            // Link fetched data to HTML weather container
             const weatherText = document.getElementById('weather-text');
             const forecastImage = document.getElementById('forecast-image');
             const temperature = document.getElementById('temperature');
@@ -88,22 +88,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    //Fetch quotes
     fetch('https://api.api-ninjas.com/v1/quotes?category=' + 'environmental', {
     headers: {
         'X-Api-Key': 'NuR9UNq5MFijxZF/OQrw9w==60mY6RXuJh6ocKLu'
     }
-})
+    })
     .then(response => {
         console.log('API Response:', response);
         return response.json();
     })
+    // Handle the fetched data
     .then(data => {
         console.log('Fetched data:', data);
 
+        // Link fetched data to HTML quotes container
         const quotationMark = document.getElementById('quotation-mark');
         const quoteElement = document.getElementById('quote');
         const authorElement = document.getElementById('author');
 
+        // Update the content based on the fetched data, create and append elements
         const quotationMarkText = document.createElement('span');
         quotationMarkText.textContent = '"';
         quotationMark.innerHTML = "";
@@ -123,13 +127,17 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Error fetching data:', error);
     });
 
+    //Fetch events
     fetch("http://localhost:3000/events")
     .then(response => response.json())
+    // Handle the fetched data
     .then(data => {
         console.log(data);
 
+        //Link fetched data to HTML events container
         const eventsContainer = document.getElementById('events-container');
 
+        // Update the content based on the fetched data
         // Iterate over the array of events
         data.forEach(event => {
             // Create a div for each event
