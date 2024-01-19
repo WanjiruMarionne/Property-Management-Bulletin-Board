@@ -1,8 +1,12 @@
+//Events display and development logic   
+//Function to show the Events tab
 // Function to show the Events tab
 function showEventsTab() {
+    document.getElementById('events-container').style.display = 'block';
+    document.getElementById('communityForumTab').style.display = 'none';
+
     const eventsContainer = document.getElementById('events-container');
     eventsContainer.innerHTML = '<h3>Scheduled Events</h3>';
-    centerElement(eventsContainer);
 
     fetchEventsData()
         .then(data => {
@@ -19,19 +23,22 @@ function showAllEvents(container) {
     });
 }
 
-// Function to fetch events data
+//Function to fetch events data
 function fetchEventsData() {
+    // Fetch events
     return fetch("http://localhost:3000/events")
         .then(response => response.json())
+        // Handle the fetched data
         .then(data => {
             console.log(data);
-            return data;
+            return data; // Return the fetched data
         })
         .catch(error => {
             console.error('Error fetching data:', error);
-            throw error;
+            throw error; // Propagate the error
         });
 }
+
 
 // Function to display a single event
 function displayEvent(container, event) {
@@ -81,7 +88,6 @@ function displayEvent(container, event) {
 }
 
 //Community forum display and development logic    
-
 function showCommunityForumTab() {
     const communityForumTab = document.getElementById('communityForumTab');
     communityForumTab.style.display = 'block';
@@ -90,7 +96,6 @@ function showCommunityForumTab() {
 }
 
 //Declare the forum comments element
-
 
 function postComment() {
     const commentInput = document.getElementById('commentInput');
@@ -105,9 +110,9 @@ function postComment() {
 }
 
 function showCommunityForum() {
+    let forumComments = [];
     const contentDiv = document.getElementById('commentsSection');
     contentDiv.innerHTML = '';
-    let forumComments = [];
     contentDiv.innerHTML += forumComments.map(comment => `<p>${comment}</p>`).join('');
 }
 
@@ -249,7 +254,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Error fetching data:', error);
     });
 
-    
 
     // Initially, show the limited events
     showEventsTab();

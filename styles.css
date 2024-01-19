@@ -206,13 +206,14 @@
 .event-container {
     box-sizing: border-box;
     background-color: rgb(217, 217, 217);
-    top: 20%;
-    left: 50%;
-    height: 15%;
-    width: 40%;
+    top: 5%;
+    left: 105%;
+    height: 75%;
+    width: 250%;
     border-radius: 25px;
     margin-top: 10%;
     margin-left: 30%;
+    position: absolute;
 }
 
 #communityForumTab {
