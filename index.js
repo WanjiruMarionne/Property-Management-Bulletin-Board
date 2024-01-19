@@ -1,57 +1,122 @@
-    // Function to show the Events tab
-    function showEventsTab() {
-        document.getElementById('events-container').style.display = 'block';
-        document.getElementById('communityForumTab').style.display = 'none';
+// Function to show the Events tab
+function showEventsTab() {
+    const eventsContainer = document.getElementById('events-container');
+    eventsContainer.innerHTML = '<h3>Scheduled Events</h3>';
+    centerElement(eventsContainer);
 
-        const eventsContainer = document.getElementById('event-container');
-        eventsContainer.innerHTML = '<h3>Scheduled Events</h3>';
+    fetchEventsData()
+        .then(data => {
+            allEventsData = data;
+            showAllEvents(eventsContainer);
+        })
+        .catch(error => console.error('Error fetching event data:', error));
+}
 
-        fetchEventsData()
-            .then(data => {
-                allEventsData = data;
-                showAllEvents(eventsContainer);
-            })
-            .catch(error => console.error('Error fetching event data:', error));
-    }
+// Function to show all events
+function showAllEvents(container) {
+    allEventsData.forEach(event => {
+        displayEvent(container, event);
+    });
+}
 
-    //Handling the events and forum tabs
-
-    //Handling the events tab and display on landing page
-    //Declare the allEventsData element
-    let allEventsData;
-
-    // Function to show all events
-    function showAllEvents(container) {
-        allEventsData.forEach(event => {
-            displayEvent(container, event);
+// Function to fetch events data
+function fetchEventsData() {
+    return fetch("http://localhost:3000/events")
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            return data;
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            throw error;
         });
-    }
-    function showCommunityForumTab() {
-        document.getElementById('events-container').style.display = 'none';
-        document.getElementById('communityForumTab').style.display = 'block';
-        showCommunityForum();
-    }
+}
 
-    function postComment() {
-        const commentInput = document.getElementById('commentInput');
-        const newComment = commentInput.value.trim();
+// Function to display a single event
+function displayEvent(container, event) {
+    const eventDiv = document.createElement('div');
+    eventDiv.classList.add('event-container');
 
-        if (newComment !== '') {
-            forumComments.push(newComment);
-            showCommunityForumTab();
-            commentInput.value = '';
-        }
-    }
+    const title = document.createElement('p');
+    title.classList.add('title');
+    title.textContent = `Title: ${event.title}`;
+    eventDiv.appendChild(title);
 
-    //Community forum display and development logic
-    //Declare the forum comments element
+    const dateTime = document.createElement('p');
+    dateTime.classList.add('date-time');
+    dateTime.textContent = `Date and Time: ${event.date_time}`;
+    eventDiv.appendChild(dateTime);
+
+    const location = document.createElement('p');
+    location.textContent = `Location: ${event.location}`;
+    eventDiv.appendChild(location);
+
+    const impact = document.createElement('p');
+    impact.textContent = `Impact: ${event.impact}`;
+    eventDiv.appendChild(impact);
+
+    const contact = document.createElement('p');
+    contact.textContent = `Contact: ${event.contact}`;
+    eventDiv.appendChild(contact);
+
+    const reason = document.createElement('p');
+    reason.textContent = `Reason: ${event.reason}`;
+    eventDiv.appendChild(reason);
+
+    const expectedDuration = document.createElement('p');
+    expectedDuration.textContent = `Expected Duration: ${event.expected_duration}`;
+    eventDiv.appendChild(expectedDuration);
+
+    const alternativeAccess = document.createElement('p');
+    alternativeAccess.textContent = `Alternative Access: ${event.alternative_access}`;
+    eventDiv.appendChild(alternativeAccess);
+
+    const updates = document.createElement('p');
+    updates.textContent = `Updates: ${event.updates}`;
+    eventDiv.appendChild(updates);
+
+    // Append the eventDiv to the eventsContainer
+    container.appendChild(eventDiv);
+}
+
+//Community forum display and development logic    
+
+function showCommunityForumTab() {
+    const communityForumTab = document.getElementById('communityForumTab');
+    communityForumTab.style.display = 'block';
+    centerElement(communityForumTab);
+    showCommunityForum();
+}
+
+//Declare the forum comments element
+
+
+function postComment() {
+    const commentInput = document.getElementById('commentInput');
+    const newComment = commentInput.value.trim();
+
     let forumComments = [];
-
-    function showCommunityForum() {
-        const contentDiv = document.getElementById('commentsSection');
-        contentDiv.innerHTML = '<h3>Community Forum</h3>';
-        contentDiv.innerHTML += forumComments.map(comment => `<p>${comment}</p>`).join('');
+    if (newComment !== '') {
+        forumComments.push(newComment);
+        showCommunityForumTab();
+        commentInput.value = '';
     }
+}
+
+function showCommunityForum() {
+    const contentDiv = document.getElementById('commentsSection');
+    contentDiv.innerHTML = '';
+    let forumComments = [];
+    contentDiv.innerHTML += forumComments.map(comment => `<p>${comment}</p>`).join('');
+}
+
+function centerElement(element) {
+    element.style.position = 'absolute';
+    element.style.top = '10%';
+    element.style.left = '150%';
+    element.style.textAlign = 'center';
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -184,68 +249,9 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Error fetching data:', error);
     });
 
-    // Function to display a single event
-    function displayEvent(container, event) {
-        const eventDiv = document.createElement('div');
-        eventDiv.classList.add('event-container');
+    
 
-        const title = document.createElement('p');
-        title.classList.add('title');
-        title.textContent = `Title: ${event.title}`;
-        eventDiv.appendChild(title);
-
-        const dateTime = document.createElement('p');
-        dateTime.classList.add('date-time');
-        dateTime.textContent = `Date and Time: ${event.date_time}`;
-        eventDiv.appendChild(dateTime);
-
-        const location = document.createElement('p');
-        location.textContent = `Location: ${event.location}`;
-        eventDiv.appendChild(location);
-
-        const impact = document.createElement('p');
-        impact.textContent = `Impact: ${event.impact}`;
-        eventDiv.appendChild(impact);
-
-        const contact = document.createElement('p');
-        contact.textContent = `Contact: ${event.contact}`;
-        eventDiv.appendChild(contact);
-
-        const reason = document.createElement('p');
-        reason.textContent = `Reason: ${event.reason}`;
-        eventDiv.appendChild(reason);
-
-        const expectedDuration = document.createElement('p');
-        expectedDuration.textContent = `Expected Duration: ${event.expected_duration}`;
-        eventDiv.appendChild(expectedDuration);
-
-        const alternativeAccess = document.createElement('p');
-        alternativeAccess.textContent = `Alternative Access: ${event.alternative_access}`;
-        eventDiv.appendChild(alternativeAccess);
-
-        const updates = document.createElement('p');
-        updates.textContent = `Updates: ${event.updates}`;
-        eventDiv.appendChild(updates);
-
-        // Append the eventDiv to the eventsContainer
-        container.appendChild(eventDiv);
-    }
-
-    // Function to fetch events data
-    function fetchEventsData() {
-        return fetch("http://localhost:3000/events")
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                return data;
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                throw error;
-            });
-    }
-
-        // Initially, show the limited events
-        showEventsTab();
+    // Initially, show the limited events
+    showEventsTab();
 
 });
