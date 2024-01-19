@@ -1,21 +1,5 @@
 //Events display and development logic   
 //Function to show the Events tab
-// Function to show the Events tab
-function showEventsTab() {
-    document.getElementById('events-container').style.display = 'block';
-    document.getElementById('communityForumTab').style.display = 'none';
-
-    const eventsContainer = document.getElementById('events-container');
-    eventsContainer.innerHTML = '<h3>Scheduled Events</h3>';
-
-    fetchEventsData()
-        .then(data => {
-            allEventsData = data;
-            showAllEvents(eventsContainer);
-        })
-        .catch(error => console.error('Error fetching event data:', error));
-}
-
 // Function to show all events
 function showAllEvents(container) {
     allEventsData.forEach(event => {
@@ -39,7 +23,6 @@ function fetchEventsData() {
         });
 }
 
-
 // Function to display a single event
 function displayEvent(container, event) {
     const eventDiv = document.createElement('div');
@@ -55,52 +38,110 @@ function displayEvent(container, event) {
     dateTime.textContent = `Date and Time: ${event.date_time}`;
     eventDiv.appendChild(dateTime);
 
+    //Truncate the events details so that only title and date shows
+    const additionalContent = document.createElement('div');
+    additionalContent.classList.add('additional-content');
+
     const location = document.createElement('p');
     location.textContent = `Location: ${event.location}`;
-    eventDiv.appendChild(location);
+    additionalContent.appendChild(location);
 
     const impact = document.createElement('p');
     impact.textContent = `Impact: ${event.impact}`;
-    eventDiv.appendChild(impact);
+    additionalContent.appendChild(impact);
 
     const contact = document.createElement('p');
     contact.textContent = `Contact: ${event.contact}`;
-    eventDiv.appendChild(contact);
+    additionalContent.appendChild(contact);
 
     const reason = document.createElement('p');
     reason.textContent = `Reason: ${event.reason}`;
-    eventDiv.appendChild(reason);
+    additionalContent.appendChild(reason);
 
     const expectedDuration = document.createElement('p');
     expectedDuration.textContent = `Expected Duration: ${event.expected_duration}`;
-    eventDiv.appendChild(expectedDuration);
+    additionalContent.appendChild(expectedDuration);
 
     const alternativeAccess = document.createElement('p');
     alternativeAccess.textContent = `Alternative Access: ${event.alternative_access}`;
-    eventDiv.appendChild(alternativeAccess);
+    additionalContent.appendChild(alternativeAccess);
 
     const updates = document.createElement('p');
     updates.textContent = `Updates: ${event.updates}`;
-    eventDiv.appendChild(updates);
+    additionalContent.appendChild(updates);
 
-    // Append the eventDiv to the eventsContainer
+    //Append the additionalContent to the eventDiv 
+    eventDiv.appendChild(additionalContent);
+
+    //Append the eventDiv to the eventsContainer
     container.appendChild(eventDiv);
+
+   
+    eventDiv.style.top = `${allEventsData.indexOf(event) * 400}%`; // Adjust the multiplier as needed
+
+    //Create a more details button to handle the truncated data
+    const moreDetailsButton = document.createElement('button');
+    moreDetailsButton.textContent = 'More Details';
+
+    // Add a click event listener to the moreDetailsButton
+    moreDetailsButton.addEventListener('click', function () {
+    //Toggle the display style of additionalContent
+    additionalContent.style.display = (additionalContent.style.display === 'none' || additionalContent.style.display === '') ? 'block' : 'none';
+    });
+
+
 }
 
+// Function to hide all additional content
+function hideAllAdditionalContent() {
+    moreDetailsButtons.forEach(button => {
+        const additionalContent = button.nextElementSibling;
+        additionalContent.style.display = 'none';
+    });
+}
+
+// Function to toggle the display of additional content
+function toggleAdditionalContent(additionalContent) {
+    hideAllAdditionalContent();
+    additionalContent.style.display = (additionalContent.style.display === 'none' || additionalContent.style.display === '') ? 'block' : 'none';
+}
+
+
+    // Function to show the Events tab
+    function showEventsTab() {
+        document.getElementById('events-container').style.display = 'block';
+        document.getElementById('communityForumTab').style.display = 'none';
+    
+        const eventsContainer = document.getElementById('events-container');
+        eventsContainer.innerHTML = '<h3>Scheduled Events</h3>';
+        centerElement(eventsContainer);
+        showAllEvents();
+    
+        fetchEventsData()
+            .then(data => {
+                allEventsData = data;
+                showAllEvents(eventsContainer);
+            })
+            .catch(error => console.error('Error fetching event data:', error));
+    }
+    
+
 //Community forum display and development logic    
+    
+// Function to show the community forum tab
 function showCommunityForumTab() {
     const communityForumTab = document.getElementById('communityForumTab');
     communityForumTab.style.display = 'block';
     centerElement(communityForumTab);
     showCommunityForum();
-}
+    }
 
-//Declare the forum comments element
-
+//Function to post comments
 function postComment() {
     const commentInput = document.getElementById('commentInput');
     const newComment = commentInput.value.trim();
 
+    //Declare the forum comments element
     let forumComments = [];
     if (newComment !== '') {
         forumComments.push(newComment);
@@ -109,6 +150,7 @@ function postComment() {
     }
 }
 
+//Function to show the comments section
 function showCommunityForum() {
     let forumComments = [];
     const contentDiv = document.getElementById('commentsSection');
@@ -116,6 +158,7 @@ function showCommunityForum() {
     contentDiv.innerHTML += forumComments.map(comment => `<p>${comment}</p>`).join('');
 }
 
+//Function to style the section when it shows on window
 function centerElement(element) {
     element.style.position = 'absolute';
     element.style.top = '10%';
@@ -254,8 +297,22 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Error fetching data:', error);
     });
 
-
-    // Initially, show the limited events
-    showEventsTab();
+    //DOM loading for events
+    const maxInitialEventsToShow = 3;
+    // Function to show 3 events
+    function showLimitedEvents(container, maxEvents) {
+        allEventsData.slice(0, maxEvents).forEach(event => {
+            displayEvent(container, event);
+        });
+    }
+    
+    fetchEventsData()
+        .then(data => {
+            allEventsData = data;
+            showLimitedEvents(eventsContainer, maxInitialEventsToShow);
+        })
+        .catch(error => console.error('Error fetching event data:', error));
+    
+        showLimitedEvents(eventsContainer, maxInitialEventsToShow);
 
 });
