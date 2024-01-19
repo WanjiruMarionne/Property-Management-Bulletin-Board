@@ -16,7 +16,7 @@
 
 #top-box {
     width: 100%;
-    height: 5%;
+    height: 7%;
     box-sizing: border-box;
     background-color: rgb(192, 67, 27);
     top: 0;
@@ -25,6 +25,7 @@
 
 #nav-container {
     box-sizing: border-box;
+    border-radius: 12px;
     background-color: rgb(192, 67, 27);
     top: 9%;
     left: 3%;
@@ -56,6 +57,144 @@
     display: inline-block;
 }
 
-.tab-content {
-    margin-left: 15px;
+
+
+#footer {
+    width: 100%;
+    height: 20%;
+    box-sizing: border-box;
+    background-color: rgb(192, 67, 27);
+    bottom: 0;
+    left: 0;
+}
+
+#welcome-message {
+    top: 5%;
+    left: 50%;
+    position: absolute;
+}
+
+#welcome-message h3 {
+    padding-left: 50px;
+}
+
+#event1 {
+    box-sizing: border-box;
+    background-color: rgb(217, 217, 217);;
+    top: 20%;
+    left: 30%;
+    height: 15%;
+    width: 40%;
+    position: absolute;
+    border-radius: 15px;
+}
+
+#event2 {
+    box-sizing: border-box;
+    background-color: rgb(217, 217, 217);;
+    top: 37%;
+    left: 30%;
+    height: 15%;
+    width: 40%;
+    position: absolute;
+    border-radius: 15px;
+}
+
+#event3 {
+    box-sizing: border-box;
+    background-color: rgb(217, 217, 217);;
+    top: 54%;
+    left: 30%;
+    height: 15%;
+    width: 40%;
+    position: absolute;
+    border-radius: 15px;
+}
+
+#quotes-container {
+    box-sizing: border-box;
+    background-color: rgb(217, 217, 217);
+    top: 20%;
+    left: 75%;
+    height: 48%;
+    width: 20%;
+    position: absolute;
+    border-radius: 15px;
+}
+
+#weather-container {
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: azure;
+    height: 30%;
+    width: 80%;
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    display: flex;
+    flex-direction: column;
+}
+
+#weather-text {
+    text-align: center;
+    text-decoration: rgb(37, 27, 27);
+    top: 7%;
+    left: 10%;
+    position: absolute;
+    font-weight: 1000;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+#forecast-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    height: 70%;
+    width: 90%;
+}
+
+#forecast-image-container {
+    box-sizing: border-box;
+    background-color: blueviolet;
+    height: 80%;
+    width: 50%;
+    position: absolute;
+    top: 15%;
+    left: 5%;
+}
+
+#forecast-image {
+    max-height: 80%;
+    max-width: 80%;
+    position: absolute;
+    top: 35%;
+    left: 5%;
+}
+
+#description-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#description-container #temperature {
+    top: 40%;
+    left: 50%;
+    position: absolute;
+}
+
+#description-container #weather-desc {
+    top: 40%;
+    left: 60%;
+    position: absolute;
+}
+
+#holiday-container {
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: azure;
+    height: 30%;
+    width: 80%;
+    position: absolute;
+    bottom: 15%;
+    left: 10%;
 }
