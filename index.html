@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./styles.css"/>
     <title>Bulletin Dashboard</title>
     <script src="./index.js"></script>
+
 </head>
 <body>
     <div id="background-container" class="fixed"></div>
@@ -14,57 +15,43 @@
         <div id="top-box" class="fixed"></div>
         <main>
             <div id="nav-container" class="fixed">
-                <div id="weather-container">
-                    <div id="weather-text"></div>
-                    <div id="forecast-container">
-                        <div id="forecast-image-container">
-                            <div id="forecast-image"></div>
-                        </div>
-                        <div id="description-container">
-                            <div id="temperature"></div>
-                            <div id="weather-desc"></div>
-                        </div>
-                    </div>           
+                <div id="user-image"></div>
+                <div id="navtabs">
+                    <div id="announcements-tab" class="tab">Announcements</div>
+                    <div id="maintenance-schedule-tab" class="tab">Maintenance Schedule</div>
+                    <div id="emergency-alerts-tab" class="tab">Emergency Alerts</div>
+                    <div id="bookings-tab" class="tab">Bookings</div>
+                    <div id="reminders-tab" class="tab">Reminders</div>
+                    <div id="community-resources-tab" class="tab">Community Resources</div>
+                    <div id="community-forum-tab" class="tab">Community Forum</div>
+                    <div id="management-team-tab" class="tab">Management Team</div>
                 </div>
 
-                <div id="events-forum-tabs">
-                    <button class="buttons" onclick="showEventsTab()">Events</button>
-                    <button class="buttons" onclick="showCommunityForumTab()">Community Forum</button>
-                </div>
 
-                <div id="events-container" class="tab">
-                    <div id="event-container"></div>
-                </div>
-
-                <div id="communityForumTab" class="tab">
-                    <h2>Hello there! Let's Chat</h2>
-                    <div>
-                        <textarea id="commentInput" rows="4" cols="50"></textarea><br>
-                        <button onclick="postComment()">Post Comment</button>
-                    </div>
-                    <div id="commentsSection">
-                        <h3>Comments</h3>
-                    </div>
-                </div>
             </div>
         </main>
 
-        <div id="welcome-message">
-            <h2>Good Morning</h2>
-            <h3>Rachael!</h3>
-        </div>
-
-        <div id="quotes-container">
-            <div id="quotation-mark"></div>
-            <div id="quote"></div>
-            <div id="author"></div>
-        </div>
+        <div id="welcome-message">Good Morning Rachael</div>
+        <div id="event-schedules"></div>
+        <div id="quotes"></div>
 
         <div id="footer" class="fixed">
-            <img id="logo" src="./images/logo.png" alt="Logo">
-            <img id="social-media" src="./images/social-media-icons.png" alt="Social-media Handles">
+            <div id="weather"></div>
+            <div id="time"></div>
+            <div id="date"></div>
         </div>
     </div>
-    <script src="./index.js"></script>
+
+    <div id="content-container">
+        <div id="content-announcements"></div>
+        <div id="content-maintenance-schedule"></div>
+        <div id="content-emergency-alerts"></div>
+        <div id="content-bookings"></div>
+        <div id="content-reminders"></div>
+        <div id="content-community-resources"></div>
+        <div id="content-community-forum"></div>
+        <div id="content-management-team"></div>
+    </div>
+
 </body>
 </html>
