@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     
+    //Handling the weather container
     //Weather information
     // Default latitude and longitude values for the town of application: set to Westlands-Kenya
     const latitude = -1.2667;
@@ -88,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    //Handling the quotes container
     //Fetch quotes
     fetch('https://api.api-ninjas.com/v1/quotes?category=' + 'environmental', {
     headers: {
@@ -127,68 +129,123 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Error fetching data:', error);
     });
 
-    //Fetch events
-    fetch("http://localhost:3000/events")
-    .then(response => response.json())
-    // Handle the fetched data
-    .then(data => {
-        console.log(data);
+    //Handling the events and forum tabs
 
-        //Link fetched data to HTML events container
-        const eventsContainer = document.getElementById('events-container');
+    //Handling the events tab and display on landing page
+    //Declare the allEventsData element
+    let allEventsData;
 
-        // Update the content based on the fetched data
-        // Iterate over the array of events
-        data.forEach(event => {
-            // Create a div for each event
-            const eventDiv = document.createElement('div');
-            eventDiv.classList.add('event-container');
+    // Function to show the Events tab
+    function showEventsTab() {
+        document.getElementById('events-container').style.display = 'block';
+        document.getElementById('communityForumTab').style.display = 'none';
 
-            // Create and append elements for each event property
-            const title = document.createElement('p');
-            title.classList.add('title'); // Add title class
-            title.textContent = `Title: ${event.title}`;
-            eventDiv.appendChild(title);
+        const eventsContainer = document.getElementById('event-container');
+        eventsContainer.innerHTML = '<h3>Scheduled Events</h3>';
 
-            const dateTime = document.createElement('p');
-            dateTime.classList.add('date-time'); // Add date-time class
-            dateTime.textContent = `Date and Time: ${event.date_time}`;
-            eventDiv.appendChild(dateTime);
+        fetchEventsData()
+            .then(data => {
+                allEventsData = data;
+                showAllEvents(eventsContainer);
+            })
+            .catch(error => console.error('Error fetching event data:', error));
+    }
 
-            const location = document.createElement('p');
-            location.textContent = `Location: ${event.location}`;
-            eventDiv.appendChild(location);
-
-            const impact = document.createElement('p');
-            impact.textContent = `Impact: ${event.impact}`;
-            eventDiv.appendChild(impact);
-
-            const contact = document.createElement('p');
-            contact.textContent = `Contact: ${event.contact}`;
-            eventDiv.appendChild(contact);
-
-            const reason = document.createElement('p');
-            reason.textContent = `Reason: ${event.reason}`;
-            eventDiv.appendChild(reason);
-
-            const expectedDuration = document.createElement('p');
-            expectedDuration.textContent = `Expected Duration: ${event.expected_duration}`;
-            eventDiv.appendChild(expectedDuration);
-
-            const alternativeAccess = document.createElement('p');
-            alternativeAccess.textContent = `Alternative Access: ${event.alternative_access}`;
-            eventDiv.appendChild(alternativeAccess);
-
-            const updates = document.createElement('p');
-            updates.textContent = `Updates: ${event.updates}`;
-            eventDiv.appendChild(updates);
-
-            // Append the eventDiv to the eventsContainer
-            eventsContainer.appendChild(eventDiv);
+    // Function to show all events
+    function showAllEvents(container) {
+        allEventsData.forEach(event => {
+            displayEvent(container, event);
         });
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error);
-    });
-    
+    }
+
+    // Function to display a single event
+    function displayEvent(container, event) {
+        const eventDiv = document.createElement('div');
+        eventDiv.classList.add('event-container');
+
+        const title = document.createElement('p');
+        title.classList.add('title');
+        title.textContent = `Title: ${event.title}`;
+        eventDiv.appendChild(title);
+
+        const dateTime = document.createElement('p');
+        dateTime.classList.add('date-time');
+        dateTime.textContent = `Date and Time: ${event.date_time}`;
+        eventDiv.appendChild(dateTime);
+
+        const location = document.createElement('p');
+        location.textContent = `Location: ${event.location}`;
+        eventDiv.appendChild(location);
+
+        const impact = document.createElement('p');
+        impact.textContent = `Impact: ${event.impact}`;
+        eventDiv.appendChild(impact);
+
+        const contact = document.createElement('p');
+        contact.textContent = `Contact: ${event.contact}`;
+        eventDiv.appendChild(contact);
+
+        const reason = document.createElement('p');
+        reason.textContent = `Reason: ${event.reason}`;
+        eventDiv.appendChild(reason);
+
+        const expectedDuration = document.createElement('p');
+        expectedDuration.textContent = `Expected Duration: ${event.expected_duration}`;
+        eventDiv.appendChild(expectedDuration);
+
+        const alternativeAccess = document.createElement('p');
+        alternativeAccess.textContent = `Alternative Access: ${event.alternative_access}`;
+        eventDiv.appendChild(alternativeAccess);
+
+        const updates = document.createElement('p');
+        updates.textContent = `Updates: ${event.updates}`;
+        eventDiv.appendChild(updates);
+
+        // Append the eventDiv to the eventsContainer
+        container.appendChild(eventDiv);
+    }
+
+    // Function to fetch events data
+    function fetchEventsData() {
+        return fetch("http://localhost:3000/events")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                return data;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                throw error;
+            });
+    }
+
+    //Community forum display and development logic
+    //Declare the forum comments element
+    let forumComments = [];
+
+    function showCommunityForumTab() {
+        document.getElementById('events-container').style.display = 'none';
+        document.getElementById('communityForumTab').style.display = 'block';
+        showCommunityForum();
+    }
+
+    function showCommunityForum() {
+        const contentDiv = document.getElementById('commentsSection');
+        contentDiv.innerHTML = '<h3>Community Forum</h3>';
+        contentDiv.innerHTML += forumComments.map(comment => `<p>${comment}</p>`).join('');
+    }
+
+    function postComment() {
+        const commentInput = document.getElementById('commentInput');
+        const newComment = commentInput.value.trim();
+
+        if (newComment !== '') {
+            forumComments.push(newComment);
+            showCommunityForumTab();
+            commentInput.value = '';
+        }
+    }
+
+    // Initially, show the limited events
+    showEventsTab();
 });

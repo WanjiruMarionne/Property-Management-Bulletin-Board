@@ -154,7 +154,7 @@
     position: absolute;
 }
 
-#holiday-container {
+#events-forum-tabs {
     box-sizing: border-box;
     border-radius: 8px;
     background-color: azure;
@@ -163,6 +163,11 @@
     position: absolute;
     bottom: 15%;
     left: 10%;
+}
+
+#events-container {
+    display: none;
+
 }
 
 .event-container p.title {
@@ -193,4 +198,7 @@
     margin-left: 30%;
 }
 
+#communityForumTab {
+    display: none;
+}
 

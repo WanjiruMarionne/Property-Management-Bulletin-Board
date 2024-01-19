@@ -1,131 +1,16 @@
 # Property-Management-Bulletin-Board
 
+# Project Details
+Property management bulletin board is a web application that gives updates to residents on scheduled events. It also updates them on the weather forecast for the day as well as give them a quote to ponder for the day.
 
+Data is retrieved in JSON format from:
+1. A local JSON file for the events
+2. Open Meteo Weather API: https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=${hourly}&forecast_days=${forecastDays}`
+3. API Ninjas environment quotes: 'https://api.api-ninjas.com/v1/quotes?category=' + 'environmental'
 
-# Pending: 
-1. Logo and social media icons on footer
+# Getting Started
+Open the `index.html` file in your web browser to launch the application.
 
+# License
+This project is licensed under the MIT License.
 
-
-
-
-#forecast-container #forecast-image {
-    height: 25px;
-    width: 25px;
-    position: absolute;
-}
-
-
-
-#forecast-container #description-container {
-    position: absolute;
-    top: 30%;
-    left: 40%;
-    text-align: center;
-}
-
-#calendar-time {
-    box-sizing: border-box;
-    height: 50%;
-    width: 20%;
-    position: absolute;
-    top: 15%;
-    left: 77%;
-}
-
-#logo img {
-    width: 50%;
-    height: 80%;
-}
-
-.content-container {
-    background-color:rgb(217, 217, 217);
-}
-
-
-
- document.addEventListener('DOMContentLoaded', function() {
-
-fetch("http://localhost:3000/events")
-.then(response => {
-    console.log(response);
-    return response.json();
-})
-.then(data => {
-    console.log(data);
-
-    //Display the events on page
-    const title = document.getElementById('title');
-    const dateTime = document.getElementById('date-time');
-    const location = document.getElementById('location');
-    const impact = document.getElementById('impact');
-    const contact = document.getElementById('contact');
-    const reason = document.getElementById('reason');
-    const expectedDuration = document.getElementById('expected-duration');
-    const alternativeAccess = document.getElementById('alternative-access');
-    const updates = document.getElementById('updates');
-
-    //Link the events to JSON file and create respective elements
-    const titleText = document.createElement('p');
-    titleText.textContent = data.title;
-    title.innerHTML = "";
-    title.appendChild(titleText);
-
-    const dateTimeText = document.createElement('p');
-    dateTimeText.textContent = data.date_time;
-    dateTime.innerHTML = "";
-    dateTime.appendChild(dateTimeText);
-
-    const locationText = document.createElement('p');
-    locationText.textContent = data.location;
-    location.innerHTML = "";
-    location.appendChild(locationText);
-
-    const impactText = document.createElement('p');
-    impactText.textContent = data.impact;
-    impact.innerHTML = "";
-    impact.appendChild(impactText);
-
-    const contactText = document.createElement('p');
-    contactText.textContent = data.contact;
-    contact.innerHTML = "";
-    contact.appendChild(contactText);
-    
-    const reasonText = document.createElement('p');
-    reasonText.textContent = data.reason;
-    reason.innerHTML = "";
-    reason.appendChild(reasonText);
-
-    const expectedDurationText = document.createElement('p');
-    expectedDurationText.textContent = data.expected_duration;
-    expectedDuration.innerHTML = "";
-    expectedDuration.appendChild(expectedDurationText);
-    
-    const alternativeAccessText = document.createElement('p');
-    alternativeAccessText.textContent = data.alternative_access;
-    alternativeAccess.innerHTML = "";
-    alternativeAccess.appendChild(alternativeAccessText);
-
-    updatesText = document.createElement('p');
-    updatesText.textContent = data.updates;
-    updates.innerHTML = "";
-    updates.appendChild(updatesText);
-
-   
-})
-.catch(error => {
-    console.error('Error fetching data:', error);
-});
-
-});
-
-
-const moreDetailsButton = document.createElement('button');
-                moreDetailsButton.textContent = 'More Details';
-                moreDetailsButton.addEventListener('click', function(event) {
-                    eventContainer.classList.toggle('active');
-                    event.stopPropagation();
-                    });
-
-            // Append the "Read More" button to the event div
-            eventDiv.appendChild(moreDetailsButton);

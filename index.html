@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css"/>
     <title>Bulletin Dashboard</title>
-    <script src="./index.js"></script>
 
 </head>
 <body>
@@ -28,12 +27,25 @@
                     </div>           
                 </div>
 
-                <div id="holiday-container">
-                    <div id="upcoming-holidays"></div>
-                    <div id="holiday-name"></div>
+                <div id="events-forum-tabs">
+                    <button onclick="showEventsTab()">Events</button>
+                    <button onclick="showCommunityForumTab()">Community Forum</button>
                 </div>
 
+                <div id="events-container" class="tab">
+                    <div id="event-container"></div>
+                </div>
 
+                <div id="communityForumTab" class="tab">
+                    <h2>Community Forum</h2>
+                    <div>
+                        <textarea id="commentInput" rows="4" cols="50"></textarea><br>
+                        <button onclick="postComment()">Post Comment</button>
+                    </div>
+                    <div id="commentsSection">
+                        <h3>Comments</h3>
+                    </div>
+                </div>
             </div>
         </main>
 
@@ -41,8 +53,6 @@
             <h2>Good Morning</h2>
             <h3>Rachael!</h3>
         </div>
-        
-        <div id="events-container"></div>
 
         <div id="quotes-container">
             <div id="quotation-mark"></div>
@@ -50,12 +60,8 @@
             <div id="author"></div>
         </div>
 
-        <div id="footer" class="fixed">
-            
-
-
-        </div>
+        <div id="footer" class="fixed"></div>
     </div>
-
+    <script src="./index.js"></script>
 </body>
 </html>
