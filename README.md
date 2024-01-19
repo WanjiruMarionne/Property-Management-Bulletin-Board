@@ -118,3 +118,14 @@ fetch("http://localhost:3000/events")
 });
 
 });
+
+
+const moreDetailsButton = document.createElement('button');
+                moreDetailsButton.textContent = 'More Details';
+                moreDetailsButton.addEventListener('click', function(event) {
+                    eventContainer.classList.toggle('active');
+                    event.stopPropagation();
+                    });
+
+            // Append the "Read More" button to the event div
+            eventDiv.appendChild(moreDetailsButton);

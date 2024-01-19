@@ -1,11 +1,3 @@
-.event-container {
-    border: 1px solid #ccc;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    background-color: #534444;
-    width: 45%;
-}
-
 .event-container p.title {
     background-color: #0066cc; 
     color: #fff; 
@@ -24,12 +16,30 @@
 
 .event-container {
     box-sizing: border-box;
-    background-color: rgb(217, 217, 217);;
+    background-color: #534444;
     top: 20%;
     left: 30%;
     height: 15%;
     width: 40%;
-    position: absolute;
     border-radius: 15px;
+    position: relative; /* Set to relative */
+    overflow: hidden;
+    border: 2px solid red;
+    display: flex; /* Add flex display */
+    flex-direction: column; /* Stack children vertically */
 }
 
+.event-container .additional-content {
+    display: none;
+    width: 100%;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border: 2px solid blue;
+}
+
+.event-container.active .additional-content {
+    display: flex; /* Show additional content */
+}
