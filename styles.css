@@ -3,7 +3,7 @@
     left: 0;
     height: 200%;
     width: 100%;
-    background-image: url('./images/backgroundimage.jpg'); /* Replace with your image path */
+    background-image: url('./images/backgroundimage.jpg'); 
     background-size: cover;
     background-attachment: fixed;
     opacity: 0.15;
