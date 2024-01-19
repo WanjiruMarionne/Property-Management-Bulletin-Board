@@ -1,3 +1,11 @@
+.event-container {
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #534444;
+    width: 45%;
+}
+
 .event-container p.title {
     background-color: #0066cc; 
     color: #fff; 

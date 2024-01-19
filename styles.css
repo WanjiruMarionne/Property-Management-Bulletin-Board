@@ -70,12 +70,12 @@
 
 #welcome-message {
     top: 5%;
-    left: 50%;
+    left: 44%;
     position: absolute;
 }
 
 #welcome-message h3 {
-    padding-left: 50px;
+    padding-left: 30px;
 }
 
 #quotes-container {
@@ -85,7 +85,7 @@
     left: 75%;
     height: 48%;
     width: 20%;
-    position: absolute;
+    position: fixed;
     border-radius: 15px;
 }
 
@@ -171,7 +171,7 @@
     font-weight: bold; 
     text-transform: uppercase; 
     padding: 8px; 
-    border-radius: 4px;
+    border-radius: 8px;
     position: relative;
     width: 97%;
     left: 0%;
@@ -188,7 +188,8 @@
     left: 30%;
     height: 15%;
     width: 40%;
-    position: absolute;
-    border-radius: 15px;
+    border-radius: 25px;
+    margin-top: 10%;
+    margin-left: 30%;
 }
 
