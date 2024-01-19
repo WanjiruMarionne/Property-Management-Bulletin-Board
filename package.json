@@ -1,13 +1,13 @@
 {
   "name": "property-management-bulletin-board",
   "version": "1.0.0",
-  "description": "",
+  "description": "Wanjiru Mburu",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Wanjiru Mburu",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.3.1",
