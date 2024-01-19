@@ -1,3 +1,58 @@
+    // Function to show the Events tab
+    function showEventsTab() {
+        document.getElementById('events-container').style.display = 'block';
+        document.getElementById('communityForumTab').style.display = 'none';
+
+        const eventsContainer = document.getElementById('event-container');
+        eventsContainer.innerHTML = '<h3>Scheduled Events</h3>';
+
+        fetchEventsData()
+            .then(data => {
+                allEventsData = data;
+                showAllEvents(eventsContainer);
+            })
+            .catch(error => console.error('Error fetching event data:', error));
+    }
+
+    //Handling the events and forum tabs
+
+    //Handling the events tab and display on landing page
+    //Declare the allEventsData element
+    let allEventsData;
+
+    // Function to show all events
+    function showAllEvents(container) {
+        allEventsData.forEach(event => {
+            displayEvent(container, event);
+        });
+    }
+    function showCommunityForumTab() {
+        document.getElementById('events-container').style.display = 'none';
+        document.getElementById('communityForumTab').style.display = 'block';
+        showCommunityForum();
+    }
+
+    function postComment() {
+        const commentInput = document.getElementById('commentInput');
+        const newComment = commentInput.value.trim();
+
+        if (newComment !== '') {
+            forumComments.push(newComment);
+            showCommunityForumTab();
+            commentInput.value = '';
+        }
+    }
+
+    //Community forum display and development logic
+    //Declare the forum comments element
+    let forumComments = [];
+
+    function showCommunityForum() {
+        const contentDiv = document.getElementById('commentsSection');
+        contentDiv.innerHTML = '<h3>Community Forum</h3>';
+        contentDiv.innerHTML += forumComments.map(comment => `<p>${comment}</p>`).join('');
+    }
+
 document.addEventListener('DOMContentLoaded', function() {
     
     //Handling the weather container
@@ -110,10 +165,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const authorElement = document.getElementById('author');
 
         // Update the content based on the fetched data, create and append elements
-        const quotationMarkText = document.createElement('span');
-        quotationMarkText.textContent = '"';
-        quotationMark.innerHTML = "";
-        quotationMark.appendChild(quotationMarkText);
+        const quotationMarkImage= document.createElement('img');
+        quotationMarkImage.src = "./images/quotes.png";
+        quotationMark.innerHTML = '';
+        quotationMark.appendChild(quotationMarkImage);
 
         const quoteText = document.createElement('p');
         quoteText.textContent = data[0].quote;
@@ -128,35 +183,6 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(error => {
         console.error('Error fetching data:', error);
     });
-
-    //Handling the events and forum tabs
-
-    //Handling the events tab and display on landing page
-    //Declare the allEventsData element
-    let allEventsData;
-
-    // Function to show the Events tab
-    function showEventsTab() {
-        document.getElementById('events-container').style.display = 'block';
-        document.getElementById('communityForumTab').style.display = 'none';
-
-        const eventsContainer = document.getElementById('event-container');
-        eventsContainer.innerHTML = '<h3>Scheduled Events</h3>';
-
-        fetchEventsData()
-            .then(data => {
-                allEventsData = data;
-                showAllEvents(eventsContainer);
-            })
-            .catch(error => console.error('Error fetching event data:', error));
-    }
-
-    // Function to show all events
-    function showAllEvents(container) {
-        allEventsData.forEach(event => {
-            displayEvent(container, event);
-        });
-    }
 
     // Function to display a single event
     function displayEvent(container, event) {
@@ -219,33 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    //Community forum display and development logic
-    //Declare the forum comments element
-    let forumComments = [];
+        // Initially, show the limited events
+        showEventsTab();
 
-    function showCommunityForumTab() {
-        document.getElementById('events-container').style.display = 'none';
-        document.getElementById('communityForumTab').style.display = 'block';
-        showCommunityForum();
-    }
-
-    function showCommunityForum() {
-        const contentDiv = document.getElementById('commentsSection');
-        contentDiv.innerHTML = '<h3>Community Forum</h3>';
-        contentDiv.innerHTML += forumComments.map(comment => `<p>${comment}</p>`).join('');
-    }
-
-    function postComment() {
-        const commentInput = document.getElementById('commentInput');
-        const newComment = commentInput.value.trim();
-
-        if (newComment !== '') {
-            forumComments.push(newComment);
-            showCommunityForumTab();
-            commentInput.value = '';
-        }
-    }
-
-    // Initially, show the limited events
-    showEventsTab();
 });
