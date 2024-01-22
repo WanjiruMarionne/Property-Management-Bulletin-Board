@@ -88,8 +88,6 @@ function displayEvent(container, event) {
     //Toggle the display style of additionalContent
     additionalContent.style.display = (additionalContent.style.display === 'none' || additionalContent.style.display === '') ? 'block' : 'none';
     });
-
-
 }
 
 // Function to hide all additional content
@@ -99,13 +97,6 @@ function hideAllAdditionalContent() {
         additionalContent.style.display = 'none';
     });
 }
-
-// Function to toggle the display of additional content
-function toggleAdditionalContent(additionalContent) {
-    hideAllAdditionalContent();
-    additionalContent.style.display = (additionalContent.style.display === 'none' || additionalContent.style.display === '') ? 'block' : 'none';
-}
-
 
     // Function to show the Events tab
     function showEventsTab() {
@@ -162,7 +153,7 @@ function showCommunityForum() {
 function centerElement(element) {
     element.style.position = 'absolute';
     element.style.top = '10%';
-    element.style.left = '150%';
+    element.style.left = '100%';
     element.style.textAlign = 'center';
 }
 
@@ -296,6 +287,95 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(error => {
         console.error('Error fetching data:', error);
     });
+
+
+    function fetchEventsData() {
+        // Fetch events
+        return fetch("http://localhost:3000/events")
+            .then(response => response.json())
+            // Handle the fetched data
+            .then(data => {
+                console.log(data);
+                return data; // Return the fetched data
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                throw error; // Propagate the error
+            });
+    }
+
+    function displayEvent(container, event) {
+        const eventDiv = document.createElement('div');
+        eventDiv.classList.add('event-container');
+    
+        const title = document.createElement('p');
+        title.classList.add('title');
+        title.textContent = `Title: ${event.title}`;
+        eventDiv.appendChild(title);
+    
+        const dateTime = document.createElement('p');
+        dateTime.classList.add('date-time');
+        dateTime.textContent = `Date and Time: ${event.date_time}`;
+        eventDiv.appendChild(dateTime);
+    
+        //Truncate the events details so that only title and date shows
+        const additionalContent = document.createElement('div');
+        additionalContent.classList.add('additional-content');
+    
+        const location = document.createElement('p');
+        location.textContent = `Location: ${event.location}`;
+        additionalContent.appendChild(location);
+    
+        const impact = document.createElement('p');
+        impact.textContent = `Impact: ${event.impact}`;
+        additionalContent.appendChild(impact);
+    
+        const contact = document.createElement('p');
+        contact.textContent = `Contact: ${event.contact}`;
+        additionalContent.appendChild(contact);
+    
+        const reason = document.createElement('p');
+        reason.textContent = `Reason: ${event.reason}`;
+        additionalContent.appendChild(reason);
+    
+        const expectedDuration = document.createElement('p');
+        expectedDuration.textContent = `Expected Duration: ${event.expected_duration}`;
+        additionalContent.appendChild(expectedDuration);
+    
+        const alternativeAccess = document.createElement('p');
+        alternativeAccess.textContent = `Alternative Access: ${event.alternative_access}`;
+        additionalContent.appendChild(alternativeAccess);
+    
+        const updates = document.createElement('p');
+        updates.textContent = `Updates: ${event.updates}`;
+        additionalContent.appendChild(updates);
+    
+        //Append the additionalContent to the eventDiv 
+        eventDiv.appendChild(additionalContent);
+    
+        //Append the eventDiv to the eventsContainer
+        container.appendChild(eventDiv);
+
+        //Create a more details button to handle the truncated data
+        const moreDetailsButton = document.createElement('button');
+        moreDetailsButton.textContent = 'More Details';
+    
+        // Add a click event listener to the moreDetailsButton
+        moreDetailsButton.addEventListener('click', function () {
+        //Toggle the display style of additionalContent
+        additionalContent.style.display = (additionalContent.style.display === 'none' || additionalContent.style.display === '') ? 'block' : 'none';
+        });
+    
+    
+    }
+    
+    // Function to hide all additional content
+    function hideAllAdditionalContent() {
+        moreDetailsButtons.forEach(button => {
+            const additionalContent = button.nextElementSibling;
+            additionalContent.style.display = 'none';
+        });
+    }
 
     //DOM loading for events
     const maxInitialEventsToShow = 3;
