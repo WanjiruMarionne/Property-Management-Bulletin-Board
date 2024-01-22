@@ -289,6 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
+    //DOM loading for events
     function fetchEventsData() {
         // Fetch events
         return fetch("http://localhost:3000/events")
@@ -321,6 +322,7 @@ document.addEventListener('DOMContentLoaded', function() {
         //Truncate the events details so that only title and date shows
         const additionalContent = document.createElement('div');
         additionalContent.classList.add('additional-content');
+        additionalContent.style.display = 'none';
     
         const location = document.createElement('p');
         location.textContent = `Location: ${event.location}`;
@@ -363,13 +365,18 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add a click event listener to the moreDetailsButton
         moreDetailsButton.addEventListener('click', function () {
         //Toggle the display style of additionalContent
-        additionalContent.style.display = (additionalContent.style.display === 'none' || additionalContent.style.display === '') ? 'block' : 'none';
+        additionalContent.style.display = (additionalContent.style.display === 'none') ? 'block' : 'none';
         });
     
-    
+        //Append the button to the event-container
+        eventDiv.appendChild(moreDetailsButton);
+
+        //Add more more details buttons after the first event creation
+        moreDetailsButtons.push(moreDetailsButton);
     }
     
     // Function to hide all additional content
+    const moreDetailsButtons = [];
     function hideAllAdditionalContent() {
         moreDetailsButtons.forEach(button => {
             const additionalContent = button.nextElementSibling;
@@ -377,10 +384,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    //DOM loading for events
-    const maxInitialEventsToShow = 1;
-    let allEventsData = [];
     // Function to show 3 events
+    const maxInitialEventsToShow = 3;
+    let allEventsData = [];
     function showLimitedEvents(container, maxEvents) {
         allEventsData.slice(0, maxEvents).forEach(event => {
             displayEvent(container, event);
@@ -398,10 +404,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     showLimitedEvents(eventsContainer, maxInitialEventsToShow);
 
-    //Function to toggle the display of additional content
-    function toggleAdditionalContent(additionalContent) {
-    hideAllAdditionalContent();
-    additionalContent.style.display = (additionalContent.style.display === 'none' || additionalContent.style.display === '') ? 'block' : 'none';
-}
+    
+
 
 });
