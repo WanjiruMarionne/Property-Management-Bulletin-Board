@@ -153,7 +153,7 @@ function showCommunityForum() {
 function centerElement(element) {
     element.style.position = 'absolute';
     element.style.top = '10%';
-    element.style.left = '100%';
+    element.style.left = '120%';
     element.style.textAlign = 'center';
 }
 
@@ -378,7 +378,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     //DOM loading for events
-    const maxInitialEventsToShow = 3;
+    const maxInitialEventsToShow = 1;
+    let allEventsData = [];
     // Function to show 3 events
     function showLimitedEvents(container, maxEvents) {
         allEventsData.slice(0, maxEvents).forEach(event => {
@@ -386,6 +387,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    const eventsContainer = document.getElementById('events-container');
+
     fetchEventsData()
         .then(data => {
             allEventsData = data;
@@ -393,6 +396,12 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error fetching event data:', error));
     
-        showLimitedEvents(eventsContainer, maxInitialEventsToShow);
+    showLimitedEvents(eventsContainer, maxInitialEventsToShow);
+
+    //Function to toggle the display of additional content
+    function toggleAdditionalContent(additionalContent) {
+    hideAllAdditionalContent();
+    additionalContent.style.display = (additionalContent.style.display === 'none' || additionalContent.style.display === '') ? 'block' : 'none';
+}
 
 });
