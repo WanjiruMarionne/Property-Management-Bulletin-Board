@@ -1,12 +1,5 @@
 //Events display and development logic   
 //Function to show the Events tab
-// Function to show all events
-function showAllEvents(container) {
-    allEventsData.forEach(event => {
-        displayEvent(container, event);
-    });
-}
-
 //Function to fetch events data
 function fetchEventsData() {
     // Fetch events
@@ -19,8 +12,16 @@ function fetchEventsData() {
         })
         .catch(error => {
             console.error('Error fetching data:', error);
-            throw error; // Propagate the error
+            throw error; 
         });
+}
+
+// Function to hide all additional content
+function hideAllAdditionalContent() {
+    moreDetailsButtons.forEach(button => {
+        const additionalContent = button.nextElementSibling;
+        additionalContent.style.display = 'none';
+    });
 }
 
 // Function to display a single event
@@ -76,9 +77,9 @@ function displayEvent(container, event) {
     //Append the eventDiv to the eventsContainer
     container.appendChild(eventDiv);
 
-   
-    eventDiv.style.top = `${allEventsData.indexOf(event) * 400}%`; // Adjust the multiplier as needed
 
+    eventDiv.style.top = `${allEventsData.indexOf(event) * 400}%`; 
+    
     //Create a more details button to handle the truncated data
     const moreDetailsButton = document.createElement('button');
     moreDetailsButton.textContent = 'More Details';
@@ -90,35 +91,32 @@ function displayEvent(container, event) {
     });
 }
 
-// Function to hide all additional content
-function hideAllAdditionalContent() {
-    moreDetailsButtons.forEach(button => {
-        const additionalContent = button.nextElementSibling;
-        additionalContent.style.display = 'none';
+// Function to show all events
+function showAllEvents(container) {
+    let allEventsData = [];
+    allEventsData.forEach(event => {
+        displayEvent(container, event);
     });
 }
 
-    // Function to show the Events tab
-    function showEventsTab() {
-        document.getElementById('events-container').style.display = 'block';
-        document.getElementById('communityForumTab').style.display = 'none';
+// Function to show the Events tab
+function showEventsTab() {
+    document.getElementById('events-container').style.display = 'block';
+    document.getElementById('communityForumTab').style.display = 'none';
     
-        const eventsContainer = document.getElementById('events-container');
-        eventsContainer.innerHTML = '<h3>Scheduled Events</h3>';
-        centerElement(eventsContainer);
-        showAllEvents();
+    const eventsContainer = document.getElementById('events-container');
+    eventsContainer.innerHTML = '<h3>Scheduled Events</h3>';
+    centerElement(eventsContainer);
+    showAllEvents(eventsContainer);
     
-        fetchEventsData()
-            .then(data => {
-                allEventsData = data;
-                showAllEvents(eventsContainer);
-            })
-            .catch(error => console.error('Error fetching event data:', error));
-    }
+    fetchEventsData()
+        .then(data => {
+            showAllEvents(eventsContainer);
+    }).catch(error => console.error('Error fetching event data:', error));
+}
     
 
 //Community forum display and development logic    
-    
 // Function to show the community forum tab
 function showCommunityForumTab() {
     const communityForumTab = document.getElementById('communityForumTab');
